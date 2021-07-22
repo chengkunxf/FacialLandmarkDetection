@@ -2663,7 +2663,13 @@ export const drawMesh = (predictions, ctx) => {
   if (predictions.length > 0) {
     predictions.forEach((prediction) => {
       // const keypoints = prediction.scaledMesh;
-      const keypoints = prediction.annotations.silhouette;
+      const lipsUpperOuter = prediction.annotations.lipsUpperOuter;
+      const lipsLowerOuter = prediction.annotations.lipsLowerOuter;
+      const lipsUpperInner = prediction.annotations.lipsUpperInner;
+      const lipsLowerInner = prediction.annotations.lipsLowerInner;
+
+      const keypoints = lipsUpperOuter.concat(lipsUpperInner)
+      .concat(lipsLowerOuter).concat(lipsLowerInner);
 
       // //  Draw Triangles
       // for (let i = 0; i < TRIANGULATION.length / 3; i++) {
